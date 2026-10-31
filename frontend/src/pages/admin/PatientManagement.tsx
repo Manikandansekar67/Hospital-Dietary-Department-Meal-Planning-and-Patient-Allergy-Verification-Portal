@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-<<<<<<< HEAD
 import {
   AlertOctagon,
   CheckCircle2,
@@ -9,9 +8,6 @@ import {
   Users,
   XCircle,
 } from 'lucide-react';
-=======
-import { AlertOctagon, HeartPulse, Plus, Search, Trash2, UserPlus } from 'lucide-react';
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 import { Badge } from '../../components/common/Badge';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
@@ -22,7 +18,6 @@ import { Select } from '../../components/common/Select';
 import { EmptyState, LoadingState } from '../../components/common/StateFeedback';
 import { StatusBadge } from '../../components/common/StatusBadge';
 import { ALLERGIES_LIST, COMMON_DISEASES } from '../../constants';
-<<<<<<< HEAD
 import { adminService, DoctorInfo } from '../../services/adminService';
 import { patientService } from '../../services/patientService';
 import { AllergySeverity, Patient, PatientAllergy } from '../../types';
@@ -49,12 +44,6 @@ export const PatientManagement: React.FC = () => {
   // ────────────────────────────────────────────────
   //  Roster tab state
   // ────────────────────────────────────────────────
-=======
-import { patientService } from '../../services/patientService';
-import { AllergySeverity, Patient, PatientAllergy } from '../../types';
-
-export const PatientManagement: React.FC = () => {
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   const [patients, setPatients] = useState<Patient[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -72,7 +61,6 @@ export const PatientManagement: React.FC = () => {
   const [newAllergyName, setNewAllergyName] = useState('');
   const [newAllergySeverity, setNewAllergySeverity] = useState<AllergySeverity>('severe');
   const [dietaryRestrictions, setDietaryRestrictions] = useState('Low Sodium, Diabetic Diet');
-<<<<<<< HEAD
   const [specialInstructions, setSpecialInstructions] = useState(
     'Verify all ingredients. Ensure no cross-contact.'
   );
@@ -124,30 +112,18 @@ export const PatientManagement: React.FC = () => {
     setAssignmentRows(rows);
   }, [patients]);
 
-=======
-  const [specialInstructions, setSpecialInstructions] = useState('Verify all ingredients. Ensure no cross-contact.');
-
-  useEffect(() => {
-    loadPatients();
-  }, []);
-
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   const loadPatients = async () => {
     setIsLoading(true);
     try {
       const data = await patientService.getPatients();
       setPatients(data);
-<<<<<<< HEAD
     } catch {
       // keep existing state on error
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     } finally {
       setIsLoading(false);
     }
   };
 
-<<<<<<< HEAD
   const loadDoctors = async () => {
     setIsDoctorsLoading(true);
     try {
@@ -167,11 +143,6 @@ export const PatientManagement: React.FC = () => {
     if (!newAllergyName) return;
     if (allergiesList.some((a) => a.allergyName.toLowerCase() === newAllergyName.toLowerCase()))
       return;
-=======
-  const handleAddAllergy = () => {
-    if (!newAllergyName) return;
-    if (allergiesList.some((a) => a.allergyName.toLowerCase() === newAllergyName.toLowerCase())) return;
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 
     setAllergiesList([
       ...allergiesList,
@@ -190,7 +161,6 @@ export const PatientManagement: React.FC = () => {
 
   const handleCreatePatient = async (e: React.FormEvent) => {
     e.preventDefault();
-<<<<<<< HEAD
     setIsSubmitting(true);
     setSubmitError('');
     try {
@@ -230,28 +200,6 @@ export const PatientManagement: React.FC = () => {
     } finally {
       setIsSubmitting(false);
     }
-=======
-    const newPatient = await patientService.addPatient({
-      patientCode: `P-${Math.floor(1000 + Math.random() * 9000)}`,
-      name,
-      age: parseInt(age, 10) || 30,
-      gender: (gender.charAt(0).toUpperCase() + gender.slice(1)) as any,
-      roomNumber,
-      contactNumber,
-      admissionDate: new Date().toISOString().split('T')[0],
-      doctorId: 'doc-1',
-      doctorName: 'Dr. Sarah Jenkins',
-      status: 'admitted',
-      diseases: selectedDiseases,
-      allergies: allergiesList,
-      dietaryRestrictions: dietaryRestrictions.split(',').map((s) => s.trim()).filter(Boolean),
-      specialInstructions,
-    });
-
-    setPatients([newPatient, ...patients]);
-    setIsAddModalOpen(false);
-    resetForm();
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   };
 
   const resetForm = () => {
@@ -259,7 +207,6 @@ export const PatientManagement: React.FC = () => {
     setAge('45');
     setRoomNumber('');
     setContactNumber('');
-<<<<<<< HEAD
     setAssignDoctorId('');
     setSelectedDiseases([]);
     setAllergiesList([]);
@@ -335,12 +282,6 @@ export const PatientManagement: React.FC = () => {
   // ────────────────────────────────────────────────
   //  Filtered data
   // ────────────────────────────────────────────────
-=======
-    setSelectedDiseases([]);
-    setAllergiesList([]);
-  };
-
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   const filteredPatients = patients.filter(
     (p) =>
       p.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -349,7 +290,6 @@ export const PatientManagement: React.FC = () => {
       p.diseases.some((d) => d.toLowerCase().includes(search.toLowerCase()))
   );
 
-<<<<<<< HEAD
   const filteredAssignmentRows = assignmentRows.filter((r) => {
     const matchSearch =
       r.patientName.toLowerCase().includes(assignmentSearch.toLowerCase()) ||
@@ -366,14 +306,11 @@ export const PatientManagement: React.FC = () => {
   // ────────────────────────────────────────────────
   //  Render
   // ────────────────────────────────────────────────
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   return (
     <div className="space-y-5">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
-<<<<<<< HEAD
           <h2 className="text-lg font-bold text-slate-900">Patient Management</h2>
           <p className="text-xs text-slate-500 mt-0.5">
             Manage inpatient records, clinical dietary profiles, and doctor assignments.
@@ -674,113 +611,6 @@ export const PatientManagement: React.FC = () => {
       )}
 
       {/* ── PATIENT DETAIL MODAL ───────────────────── */}
-=======
-          <h2 className="text-lg font-bold text-slate-900">Inpatient Clinical Dietary Roster</h2>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Admitted hospital patients with diagnosed clinical conditions, allergen profiles, and dietary orders.
-          </p>
-        </div>
-        <Button size="sm" leftIcon={<UserPlus className="w-4 h-4" />} onClick={() => setIsAddModalOpen(true)}>
-          Register Inpatient
-        </Button>
-      </div>
-
-      {/* Search Toolbar */}
-      <div className="bg-white p-3 rounded-xl border border-slate-200">
-        <SearchBar
-          value={search}
-          onChange={setSearch}
-          placeholder="Search patient name, ID (e.g. PAT-001), room, or condition..."
-          className="max-w-md"
-        />
-      </div>
-
-      {/* Patient Table */}
-      {isLoading ? (
-        <LoadingState message="Retrieving inpatient health records..." />
-      ) : filteredPatients.length === 0 ? (
-        <EmptyState
-          title="No patients found"
-          description="No patients matched your search criteria."
-          action={{ label: 'Register Patient', onClick: () => setIsAddModalOpen(true) }}
-        />
-      ) : (
-        <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50/80 border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[11px]">
-                <tr>
-                  <th className="py-3 px-4 font-bold">Patient Details</th>
-                  <th className="py-3 px-4 font-bold">Room</th>
-                  <th className="py-3 px-4 font-bold">Medical Conditions</th>
-                  <th className="py-3 px-4 font-bold">Diagnosed Allergies</th>
-                  <th className="py-3 px-4 font-bold">Status</th>
-                  <th className="py-3 px-4 font-bold text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {filteredPatients.map((p) => (
-                  <tr key={p.id} className="hover:bg-slate-50/60 transition-colors">
-                    <td className="py-3 px-4">
-                      <div>
-                        <strong className="text-slate-900 block font-semibold">{p.name}</strong>
-                        <span className="text-slate-400 text-[11px]">
-                          {p.patientCode} · {p.age} yrs · {p.gender}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="py-3 px-4 font-bold text-teal-800">{p.roomNumber}</td>
-                    <td className="py-3 px-4">
-                      <div className="flex flex-wrap gap-1">
-                        {p.diseases.map((d, i) => (
-                          <span
-                            key={i}
-                            className="inline-block px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-medium border border-blue-200"
-                          >
-                            {d}
-                          </span>
-                        ))}
-                      </div>
-                    </td>
-                    <td className="py-3 px-4">
-                      <div className="flex flex-wrap gap-1">
-                        {p.allergies.length === 0 ? (
-                          <span className="text-slate-400 text-[11px]">None recorded</span>
-                        ) : (
-                          p.allergies.map((a, i) => (
-                            <span
-                              key={i}
-                              className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold border ${
-                                a.severity === 'severe' || a.severity === 'critical'
-                                  ? 'bg-red-50 text-red-700 border-red-200'
-                                  : 'bg-amber-50 text-amber-700 border-amber-200'
-                              }`}
-                            >
-                              <AlertOctagon className="w-3 h-3" />
-                              {a.allergyName} ({a.severity})
-                            </span>
-                          ))
-                        )}
-                      </div>
-                    </td>
-                    <td className="py-3 px-4">
-                      <StatusBadge type="status" value={p.status} size="sm" />
-                    </td>
-                    <td className="py-3 px-4 text-right">
-                      <Button variant="outline" size="sm" onClick={() => setSelectedPatient(p)}>
-                        View Chart
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
-
-      {/* Patient Detail Modal */}
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
       {selectedPatient && (
         <Modal
           isOpen={!!selectedPatient}
@@ -792,19 +622,14 @@ export const PatientManagement: React.FC = () => {
           <div className="space-y-4 text-xs">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
               <div>
-<<<<<<< HEAD
                 <span className="text-slate-400 block text-[10px] uppercase font-bold">
                   Age / Gender
                 </span>
-=======
-                <span className="text-slate-400 block text-[10px] uppercase font-bold">Age / Gender</span>
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                 <strong className="text-slate-800 text-sm">
                   {selectedPatient.age} yrs / {selectedPatient.gender}
                 </strong>
               </div>
               <div>
-<<<<<<< HEAD
                 <span className="text-slate-400 block text-[10px] uppercase font-bold">
                   Room Station
                 </span>
@@ -820,22 +645,10 @@ export const PatientManagement: React.FC = () => {
                 <span className="text-slate-400 block text-[10px] uppercase font-bold">
                   Clinical Status
                 </span>
-=======
-                <span className="text-slate-400 block text-[10px] uppercase font-bold">Room Station</span>
-                <strong className="text-teal-800 text-sm">{selectedPatient.roomNumber}</strong>
-              </div>
-              <div>
-                <span className="text-slate-400 block text-[10px] uppercase font-bold">Admission Date</span>
-                <strong className="text-slate-800 text-sm">{selectedPatient.admissionDate}</strong>
-              </div>
-              <div>
-                <span className="text-slate-400 block text-[10px] uppercase font-bold">Clinical Status</span>
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                 <StatusBadge type="status" value={selectedPatient.status} size="sm" />
               </div>
             </div>
 
-<<<<<<< HEAD
             {/* Assigned Doctor */}
             {selectedPatient.doctorName && (
               <div className="flex items-center gap-2 px-3 py-2 bg-teal-50 rounded-lg border border-teal-200">
@@ -849,24 +662,17 @@ export const PatientManagement: React.FC = () => {
               </div>
             )}
 
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
             {/* Diagnosed Conditions */}
             <div>
               <h4 className="font-bold text-slate-800 uppercase tracking-wider text-[11px] mb-1.5">
                 Diagnosed Medical Conditions
               </h4>
               <div className="flex flex-wrap gap-1.5">
-<<<<<<< HEAD
                 {(selectedPatient.diseases || []).map((d, i) => (
                   <span
                     key={i}
                     className="px-2.5 py-1 rounded-md bg-blue-50 text-blue-800 border border-blue-200 font-semibold"
                   >
-=======
-                {selectedPatient.diseases.map((d, i) => (
-                  <span key={i} className="px-2.5 py-1 rounded-md bg-blue-50 text-blue-800 border border-blue-200 font-semibold">
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                     {d}
                   </span>
                 ))}
@@ -879,17 +685,10 @@ export const PatientManagement: React.FC = () => {
                 Active Food Allergies &amp; Severity
               </h4>
               <div className="space-y-1.5">
-<<<<<<< HEAD
                 {(selectedPatient.allergies || []).length === 0 ? (
                   <p className="text-slate-400">No known food allergies.</p>
                 ) : (
                   (selectedPatient.allergies || []).map((a, i) => (
-=======
-                {selectedPatient.allergies.length === 0 ? (
-                  <p className="text-slate-400">No known food allergies.</p>
-                ) : (
-                  selectedPatient.allergies.map((a, i) => (
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                     <div
                       key={i}
                       className="p-2 rounded-lg bg-red-50 border border-red-200 flex items-center justify-between"
@@ -912,7 +711,6 @@ export const PatientManagement: React.FC = () => {
               <span className="text-[10px] font-bold uppercase tracking-wider text-teal-800 block">
                 Dietary Restrictions
               </span>
-<<<<<<< HEAD
               <p className="text-slate-700">
                 {selectedPatient.dietaryRestrictions.join(', ') || 'Standard in-hospital diet'}
               </p>
@@ -922,13 +720,6 @@ export const PatientManagement: React.FC = () => {
               <p className="text-slate-600 italic leading-relaxed">
                 {selectedPatient.specialInstructions || 'None'}
               </p>
-=======
-              <p className="text-slate-700">{selectedPatient.dietaryRestrictions.join(', ') || 'Standard in-hospital diet'}</p>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-800 block pt-1">
-                Special Clinical Instructions
-              </span>
-              <p className="text-slate-600 italic leading-relaxed">{selectedPatient.specialInstructions || 'None'}</p>
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
             </div>
 
             <div className="flex justify-end pt-2">
@@ -940,11 +731,7 @@ export const PatientManagement: React.FC = () => {
         </Modal>
       )}
 
-<<<<<<< HEAD
       {/* ── REGISTER PATIENT MODAL ─────────────────── */}
-=======
-      {/* Register Patient Modal */}
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
       <Modal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
@@ -998,7 +785,6 @@ export const PatientManagement: React.FC = () => {
             />
           </div>
 
-<<<<<<< HEAD
           <Select
             label="Assigned Attending Doctor (Optional)"
             value={assignDoctorId}
@@ -1012,8 +798,6 @@ export const PatientManagement: React.FC = () => {
             ]}
           />
 
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
           {/* Searchable Multi-select for Diseases */}
           <MultiSelect
             label="Diagnosed Medical Conditions / Diseases"
@@ -1047,13 +831,7 @@ export const PatientManagement: React.FC = () => {
                 <datalist id="allergies-options">
                   {ALLERGIES_LIST.map((a: any) => {
                     const allergyName = typeof a === 'string' ? a : a.name;
-<<<<<<< HEAD
                     return <option key={allergyName} value={allergyName} />;
-=======
-                    return (
-                      <option key={allergyName} value={allergyName} />
-                    );
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                   })}
                 </datalist>
               </div>
@@ -1133,7 +911,6 @@ export const PatientManagement: React.FC = () => {
             />
           </div>
 
-<<<<<<< HEAD
           {submitError && (
             <div className="p-2.5 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
               <AlertOctagon className="w-4 h-4 shrink-0 text-red-600" />
@@ -1152,13 +929,6 @@ export const PatientManagement: React.FC = () => {
               Cancel
             </Button>
             <Button type="submit" size="sm" isLoading={isSubmitting}>
-=======
-          <div className="flex items-center justify-end gap-2 pt-2">
-            <Button type="button" variant="outline" size="sm" onClick={() => setIsAddModalOpen(false)}>
-              Cancel
-            </Button>
-            <Button type="submit" size="sm">
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
               Save Inpatient Record
             </Button>
           </div>

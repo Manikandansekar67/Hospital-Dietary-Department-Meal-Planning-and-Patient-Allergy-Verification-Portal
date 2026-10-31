@@ -15,11 +15,7 @@ export const INITIAL_USERS: User[] = [
   {
     id: 'usr-admin-1',
     name: 'Dr. Evelyn Reed',
-<<<<<<< HEAD
     email: 'admin@hospital.com',
-=======
-    email: 'admin@hospital.org',
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     role: 'admin',
     department: 'Dietary Administration',
     active: true,
@@ -27,11 +23,7 @@ export const INITIAL_USERS: User[] = [
   {
     id: 'usr-doc-1',
     name: 'Dr. Sarah Jenkins, MD',
-<<<<<<< HEAD
     email: 'doctor@hospital.com',
-=======
-    email: 'doctor@hospital.org',
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     role: 'doctor',
     department: 'Endocrinology & Clinical Nutrition',
     active: true,
@@ -39,11 +31,7 @@ export const INITIAL_USERS: User[] = [
   {
     id: 'usr-kitchen-1',
     name: 'Chef Rajesh Sharma',
-<<<<<<< HEAD
     email: 'kitchen@hospital.com',
-=======
-    email: 'kitchen@hospital.org',
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     role: 'kitchen',
     department: 'Main Hospital Central Kitchen',
     active: true,
@@ -51,17 +39,10 @@ export const INITIAL_USERS: User[] = [
   {
     id: 'usr-patient-1',
     name: 'Arun Kumar',
-<<<<<<< HEAD
     email: 'patient@hospital.com',
     role: 'patient',
     department: 'Cardio-Metabolic Inpatient Ward',
     patientId: 'pat-1',
-=======
-    email: 'patient@hospital.org',
-    role: 'patient',
-    department: 'Cardio-Metabolic Inpatient Ward',
-    patientId: 'pat-arun',
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     active: true,
   },
 ];

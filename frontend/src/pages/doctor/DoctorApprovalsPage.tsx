@@ -114,14 +114,10 @@ export const DoctorApprovalsPage: React.FC = () => {
                           Conflict ({r.allergyCheck.conflictingIngredients.join(', ')})
                         </span>
                       ) : (
-<<<<<<< HEAD
                         <span className="inline-flex items-center gap-1 text-emerald-700 font-semibold">
                           <CheckCircle2 className="w-3.5 h-3.5" />
                           No conflict
                         </span>
-=======
-                        <span className="text-emerald-700 font-semibold">✓ No conflict</span>
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                       )}
                     </td>
                     <td className="py-3 px-4">

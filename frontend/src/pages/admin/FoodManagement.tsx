@@ -246,7 +246,6 @@ export const FoodManagement: React.FC = () => {
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
                         <img
-<<<<<<< HEAD
                           src={f.image && f.image.trim() !== '' ? f.image : 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80'}
                           alt={f.name}
                           referrerPolicy="no-referrer"
@@ -254,21 +253,11 @@ export const FoodManagement: React.FC = () => {
                           onError={(e) => {
                             (e.target as HTMLElement).style.display = 'none';
                           }}
-=======
-                          src={f.image}
-                          alt={f.name}
-                          referrerPolicy="no-referrer"
-                          className="w-10 h-10 rounded-lg object-cover bg-slate-100 shrink-0"
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                         />
                         <div>
                           <strong className="text-slate-900 block font-semibold">{f.name}</strong>
                           <span className="text-slate-400 text-[11px]">
-<<<<<<< HEAD
                             {f.nutrition?.calories ?? 250} kcal · Added by {f.createdBy || 'Hospital Dietary'}
-=======
-                            {f.nutrition.calories} kcal · Added by {f.createdBy}
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                           </span>
                         </div>
                       </div>
@@ -276,16 +265,11 @@ export const FoodManagement: React.FC = () => {
                     <td className="py-3 px-4 font-semibold text-slate-700">{f.category}</td>
                     <td className="py-3 px-4 max-w-xs">
                       <span className="text-slate-600 line-clamp-1">
-<<<<<<< HEAD
                         {(f.ingredients || []).join(', ') || 'Wholesome ingredients'}
-=======
-                        {f.ingredients.join(', ')}
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                       </span>
                     </td>
                     <td className="py-3 px-4">
                       <div className="flex flex-wrap gap-1">
-<<<<<<< HEAD
                         {(f.diseaseCompatibility || [])
                           .filter((d) => d && d.compatible)
                           .map((d, i) => (
@@ -297,29 +281,6 @@ export const FoodManagement: React.FC = () => {
                               {d.diseaseName}
                             </span>
                           ))}
-=======
-                        {(() => {
-                          const dc = f.diseaseCompatibility;
-                          let compatList: { diseaseName: string; compatible: boolean }[] = [];
-                          if (Array.isArray(dc)) {
-                            compatList = dc;
-                          } else if (f.compatibleDiseases && f.compatibleDiseases.length > 0) {
-                            compatList = (f.compatibleDiseases || []).map((name) => ({ diseaseName: name, compatible: true }));
-                          }
-                          const compatible = compatList.filter((d) => d.compatible);
-                          if (compatible.length === 0) {
-                            return <span className="text-slate-400 text-[10px]">—</span>;
-                          }
-                          return compatible.map((d, i) => (
-                            <span
-                              key={i}
-                              className="inline-block px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[10px] font-semibold border border-emerald-200"
-                            >
-                              ✓ {d.diseaseName}
-                            </span>
-                          ));
-                        })()}
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                       </div>
                     </td>
                     <td className="py-3 px-4">
@@ -384,7 +345,6 @@ export const FoodManagement: React.FC = () => {
           <div className="space-y-4 text-xs">
             <div className="relative h-48 rounded-xl overflow-hidden bg-slate-100">
               <img
-<<<<<<< HEAD
                 src={viewingFood.image && viewingFood.image.trim() !== '' ? viewingFood.image : 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80'}
                 alt={viewingFood.name}
                 referrerPolicy="no-referrer"
@@ -396,12 +356,6 @@ export const FoodManagement: React.FC = () => {
                     target.src = fallback;
                   }
                 }}
-=======
-                src={viewingFood.image}
-                alt={viewingFood.name}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover"
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
               />
             </div>
 
@@ -450,11 +404,7 @@ export const FoodManagement: React.FC = () => {
                 Full Ingredient Breakdown
               </span>
               <div className="flex flex-wrap gap-1.5">
-<<<<<<< HEAD
                 {(viewingFood.ingredients || []).map((ing, i) => (
-=======
-                {viewingFood.ingredients.map((ing, i) => (
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                   <span key={i} className="px-2.5 py-1 bg-slate-100 text-slate-800 rounded-md font-medium">
                     {ing}
                   </span>

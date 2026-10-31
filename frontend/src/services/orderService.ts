@@ -1,11 +1,5 @@
-<<<<<<< HEAD
 import { DailyFoodAvailability, Food, FoodRecommendation, KitchenStatus, MealType, Order, OrderStatus, Patient } from '../types';
 import { apiClient } from './apiService';
-=======
-import { DailyFoodAvailability, Food, FoodRecommendation, KitchenStatus, Order, Patient } from '../types';
-import { delay } from './apiService';
-import { storageService } from './storageService';
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 
 export interface OrderValidationResult {
   isValid: boolean;
@@ -30,44 +24,26 @@ export const orderService = {
   ): OrderValidationResult => {
     const reasons: string[] = [];
 
-<<<<<<< HEAD
     const doctorApproved = recommendation?.doctorApproval.status === 'approved' || true;
-=======
-    // 1. Doctor Approval Check
-    const doctorApproved = recommendation?.doctorApproval.status === 'approved';
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     if (!doctorApproved) {
       reasons.push('Food has not received formal clinical approval by the attending physician.');
     }
 
-<<<<<<< HEAD
-=======
-    // 2. Allergy Safety Check
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     const allergySafe = !recommendation?.allergyCheck.hasConflict;
     if (!allergySafe) {
       reasons.push('Food has detected conflict with patient allergen profile.');
     }
 
-<<<<<<< HEAD
-=======
-    // 3. Medically Compatible Check
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     const medicallyCompatible = recommendation?.diseaseCompatibility.compatible ?? true;
     if (!medicallyCompatible) {
       reasons.push('Food is medically contraindicated for patient diagnoses.');
     }
 
-<<<<<<< HEAD
-=======
-    // 4. Kitchen Active Check
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     const kitchenActive = kitchenStatus.isActive;
     if (!kitchenActive) {
       reasons.push('The hospital dietary kitchen is currently inactive. Meal intake paused.');
     }
 
-<<<<<<< HEAD
     const today = new Date().toISOString().split('T')[0];
     const availItem = todayAvailabilities.find(
       (a) => a.foodId === food.id && a.date === today && a.isAvailable
@@ -75,23 +51,6 @@ export const orderService = {
     const availableToday = !!availItem || todayAvailabilities.length === 0;
 
     const isValid = doctorApproved && allergySafe && medicallyCompatible && kitchenActive;
-=======
-    // 5. Available Today Check
-    const today = new Date().toISOString().split('T')[0];
-    const availItem = todayAvailabilities.find(
-      (a) => a.foodId === food.id && a.date === today && a.isAvailable && a.remainingPortions > 0
-    );
-    const availableToday = !!availItem;
-    if (!availableToday) {
-      reasons.push('Food is not currently available or remaining portions have been exhausted.');
-    }
-
-    // 6. Current Meal Time Check
-    // For demo/flexibility, if available today in the session, consider valid
-    const mealTimeValid = true;
-
-    const isValid = doctorApproved && allergySafe && medicallyCompatible && kitchenActive && availableToday;
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 
     return {
       isValid,
@@ -101,18 +60,13 @@ export const orderService = {
         medicallyCompatible,
         kitchenActive,
         availableToday,
-<<<<<<< HEAD
         mealTimeValid: true,
-=======
-        mealTimeValid,
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
       },
       reasons,
     };
   },
 
   getPatientOrderableFoods: async (patientId: string): Promise<{ food: Food; recommendation: FoodRecommendation; availability: DailyFoodAvailability }[]> => {
-<<<<<<< HEAD
     try {
       const res = await apiClient.get(`/patient/available-foods?patientId=${patientId}`);
       const foods = res.data.data || [];
@@ -165,36 +119,6 @@ export const orderService = {
     } catch {
       return [];
     }
-=======
-    await delay(200);
-    const patient = storageService.getPatients().find((p) => p.id === patientId);
-    if (!patient) return [];
-
-    const kitchenStatus = storageService.getKitchenStatus();
-    const today = new Date().toISOString().split('T')[0];
-    const availabilities = storageService.getDailyAvailability().filter((a) => a.date === today && a.isAvailable);
-    const recs = storageService.getRecommendations().filter((r) => r.patientId === patientId);
-
-    const results: { food: Food; recommendation: FoodRecommendation; availability: DailyFoodAvailability }[] = [];
-
-    for (const avail of availabilities) {
-      const rec = recs.find((r) => r.foodId === avail.foodId);
-      if (
-        rec &&
-        rec.doctorApproval.status === 'approved' &&
-        !rec.allergyCheck.hasConflict &&
-        rec.diseaseCompatibility.compatible
-      ) {
-        results.push({
-          food: rec.food,
-          recommendation: rec,
-          availability: avail,
-        });
-      }
-    }
-
-    return results;
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   },
 
   createOrder: async (params: {
@@ -210,7 +134,6 @@ export const orderService = {
     preparationInstructions?: string;
     specialNotes?: string;
   }): Promise<Order> => {
-<<<<<<< HEAD
     const res = await apiClient.post('/orders', {
       foodId: params.foodId,
       patientId: params.patientId,
@@ -234,73 +157,11 @@ export const orderService = {
       patientAllergies: params.patientAllergies || [],
       avoidIngredients: params.avoidIngredients || [],
       preparationInstructions: o.specialInstructions || 'Sanitized preparation',
-=======
-    await delay(400);
-    const patient = storageService.getPatients().find((p) => p.id === params.patientId);
-    if (!patient) throw new Error('Patient record not found');
-
-    const food = storageService.getFoods().find((f) => f.id === params.foodId);
-    if (!food) throw new Error('Food item not found');
-
-    const kitchenStatus = storageService.getKitchenStatus();
-    if (!kitchenStatus.isActive) {
-      throw new Error('Sorry for the inconvenience. The kitchen is currently inactive. Please choose another available meal.');
-    }
-
-    const today = new Date().toISOString().split('T')[0];
-    const availabilities = storageService.getDailyAvailability();
-    const availItem = availabilities.find((a) => a.foodId === food.id && a.date === today && a.isAvailable);
-    if (!availItem) {
-      throw new Error('This meal is currently unavailable. Please choose another meal.');
-    }
-
-    const rec = storageService
-      .getRecommendations()
-      .find((r) => r.patientId === patient.id && r.foodId === food.id);
-
-    if (!rec || rec.doctorApproval.status !== 'approved') {
-      throw new Error('Safety block: This food has not been approved by your attending physician.');
-    }
-    if (rec.allergyCheck.hasConflict) {
-      throw new Error('Safety block: Detected critical allergy conflict with your profile.');
-    }
-
-    // Decrement available portions
-    if (availItem.remainingPortions > 0) {
-      availItem.remainingPortions -= 1;
-      storageService.saveDailyAvailability(availabilities);
-    }
-
-    // Build patient avoided ingredients list
-    const avoidIngredients: string[] = [];
-    patient.allergies.forEach((all) => {
-      avoidIngredients.push(all.allergyName);
-      avoidIngredients.push(`${all.allergyName}-derived oils & powders`);
-    });
-
-    const newOrder: Order = {
-      id: `ord-${Date.now()}`,
-      orderNumber: `ORD-2026-${Math.floor(100 + Math.random() * 900)}`,
-      patientId: patient.id,
-      patientName: patient.name,
-      roomNumber: patient.roomNumber,
-      foodId: food.id,
-      foodName: food.name,
-      foodCategory: food.category,
-      mealType: params.mealType || availItem.mealType || 'lunch',
-      orderDate: today,
-      orderTime: new Date().toISOString(),
-      status: 'pending',
-      patientAllergies: patient.allergies,
-      avoidIngredients,
-      preparationInstructions: `${food.preparationInstructions} | Dedicated allergen-free sanitization for patient with: ${patient.allergies.map((a) => `${a.allergyName} (${a.severity})`).join(', ')}.`,
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
       doctorApproved: true,
       timeline: [
         {
           status: 'pending',
           timestamp: new Date().toISOString(),
-<<<<<<< HEAD
           notes: 'Order placed via verified bedside portal',
         },
       ],
@@ -349,51 +210,10 @@ export const orderService = {
 
   getOrderById: async (orderId: string): Promise<Order | null> => {
     const orders = await orderService.getOrders();
-=======
-          notes: 'Order placed by patient via verified bedside portal',
-        },
-      ],
-    };
-
-    const orders = storageService.getOrders();
-    orders.unshift(newOrder);
-    storageService.saveOrders(orders);
-
-    // Notify kitchen
-    const notifs = storageService.getNotifications();
-    notifs.unshift({
-      id: `notif-${Date.now()}`,
-      type: 'order_accepted',
-      title: 'New Patient Diet Order Received',
-      message: `Order #${newOrder.orderNumber} placed for ${patient.name} (${patient.roomNumber}). Review allergy warnings.`,
-      timestamp: new Date().toISOString(),
-      read: false,
-      priority: patient.allergies.some((a) => a.severity === 'severe' || a.severity === 'critical')
-        ? 'critical'
-        : 'normal',
-      targetRole: 'kitchen',
-      link: '/kitchen/orders',
-    });
-    storageService.saveNotifications(notifs);
-
-    return newOrder;
-  },
-
-  getPatientOrders: async (patientId: string): Promise<Order[]> => {
-    await delay(150);
-    const orders = storageService.getOrders();
-    return orders.filter((o) => o.patientId === patientId);
-  },
-
-  getOrderById: async (orderId: string): Promise<Order | null> => {
-    await delay(100);
-    const orders = storageService.getOrders();
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     return orders.find((o) => o.id === orderId) || null;
   },
 
   getOrders: async (): Promise<Order[]> => {
-<<<<<<< HEAD
     let rawOrders: any[] = [];
     try {
       const res = await apiClient.get('/kitchen/orders');
@@ -445,10 +265,6 @@ export const orderService = {
         ],
       };
     });
-=======
-    await delay(200);
-    return storageService.getOrders();
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   },
 
   getOrdersByPatientId: async (patientId: string): Promise<Order[]> => {
@@ -461,7 +277,6 @@ export const orderService = {
     staffName: string = 'Staff',
     notes?: string
   ): Promise<Order> => {
-<<<<<<< HEAD
     await apiClient.put(`/orders/${orderId}/status`, {
       status: String(status).toUpperCase(),
       notes: notes || `Order updated to ${status} by ${staffName}`,
@@ -479,37 +294,10 @@ export const orderService = {
     const orders = await orderService.getOrders();
     const order = orders.find((o) => o.id === orderId) || orders[0];
     order.feedback = {
-=======
-    await delay(250);
-    const orders = storageService.getOrders();
-    const index = orders.findIndex((o) => o.id === orderId);
-    if (index === -1) throw new Error('Order not found');
-
-    const order = orders[index];
-    order.status = status;
-    order.timeline.push({
-      status,
-      timestamp: new Date().toISOString(),
-      by: staffName,
-      notes: notes || `Order updated to ${status.toUpperCase()} by ${staffName}`,
-    });
-    storageService.saveOrders(orders);
-    return order;
-  },
-
-  submitFeedback: async (orderId: string, rating: number, comment: string): Promise<Order> => {
-    await delay(300);
-    const orders = storageService.getOrders();
-    const index = orders.findIndex((o) => o.id === orderId);
-    if (index === -1) throw new Error('Order not found');
-
-    orders[index].feedback = {
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
       rating,
       comment,
       submittedAt: new Date().toISOString(),
     };
-<<<<<<< HEAD
     return order;
   },
 
@@ -524,9 +312,5 @@ export const orderService = {
 
   cancelOrder: async (orderId: string, reason?: string): Promise<void> => {
     await apiClient.delete(`/orders/${orderId}`, { data: { reason } });
-=======
-    storageService.saveOrders(orders);
-    return orders[index];
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   },
 };

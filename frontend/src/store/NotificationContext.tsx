@@ -15,10 +15,7 @@ interface NotificationContextType {
   unreadCount: number;
   toasts: ToastItem[];
   showToast: (toast: Omit<ToastItem, 'id'>) => void;
-<<<<<<< HEAD
   addToast: (toast: Omit<ToastItem, 'id'>) => void;
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   removeToast: (id: string) => void;
   markAsRead: (id: string) => Promise<void>;
   markAllAsRead: () => Promise<void>;
@@ -49,17 +46,12 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
   };
 
   useEffect(() => {
-<<<<<<< HEAD
     if (!user) {
       setNotifications([]);
       return;
     }
     refreshNotifications();
     const interval = setInterval(refreshNotifications, 15000);
-=======
-    refreshNotifications();
-    const interval = setInterval(refreshNotifications, 10000);
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     return () => clearInterval(interval);
   }, [user]);
 
@@ -96,10 +88,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
         unreadCount,
         toasts,
         showToast,
-<<<<<<< HEAD
         addToast: showToast,
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
         removeToast,
         markAsRead,
         markAllAsRead,

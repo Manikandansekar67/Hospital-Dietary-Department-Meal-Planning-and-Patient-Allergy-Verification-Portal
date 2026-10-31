@@ -98,10 +98,7 @@ export const ALLERGIES_LIST = COMMON_ALLERGENS;
 export const HOSPITAL_INFO = {
   name: 'St. Jude Metropolitan Hospital',
   department: 'Department of Clinical Nutrition & Dietary Services',
-<<<<<<< HEAD
   portalTitle: 'Dietary Meal Planning & Allergy Verification Portal',
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   hotline: 'Ext. 4082 (Dietary Nurse Dispatch)',
   safetyStandard: 'HACCP & Patient Safety Certified',
 };

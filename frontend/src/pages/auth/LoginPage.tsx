@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-=======
-import { useLocation, useNavigate } from 'react-router-dom';
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 import {
   AlertCircle,
   ChefHat,
   HeartPulse,
   Lock,
   Mail,
-<<<<<<< HEAD
   Phone,
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   ShieldCheck,
   Stethoscope,
   User as UserIcon,
@@ -31,13 +24,8 @@ export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-<<<<<<< HEAD
   const [identifier, setIdentifier] = useState('doctor@hospital.com');
   const [password, setPassword] = useState('Hospital@123');
-=======
-  const [email, setEmail] = useState('doctor@hospital.org');
-  const [password, setPassword] = useState('hospital-safe-pass');
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
@@ -46,7 +34,6 @@ export const LoginPage: React.FC = () => {
 
   const from = (location.state as any)?.from?.pathname;
 
-<<<<<<< HEAD
   const isPhoneIdentifier = /^[+\d][\d\s\-().]{4,}$/.test(identifier.trim()) && !identifier.includes('@');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -75,13 +62,6 @@ export const LoginPage: React.FC = () => {
 
     try {
       const user = await login(trimmed, undefined, password);
-=======
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    try {
-      const user = await login(email);
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
       redirectToRole(user.role);
     } catch (err: any) {
       setError(err.message || 'Invalid credentials or inactive account.');
@@ -89,18 +69,11 @@ export const LoginPage: React.FC = () => {
   };
 
   const handleQuickLogin = async (role: Role, defaultEmail: string) => {
-<<<<<<< HEAD
     setIdentifier(defaultEmail);
     setPassword('Hospital@123');
     setError(null);
     try {
       const user = await login(defaultEmail, role, 'Hospital@123');
-=======
-    setEmail(defaultEmail);
-    setError(null);
-    try {
-      const user = await login(defaultEmail, role);
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
       redirectToRole(user.role);
     } catch (err: any) {
       setError(err.message || 'Login failed.');
@@ -108,11 +81,7 @@ export const LoginPage: React.FC = () => {
   };
 
   const redirectToRole = (role: Role) => {
-<<<<<<< HEAD
     if (from && from !== '/login' && from.startsWith(`/${role}`)) {
-=======
-    if (from && from !== '/login') {
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
       navigate(from, { replace: true });
       return;
     }
@@ -161,7 +130,6 @@ export const LoginPage: React.FC = () => {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-<<<<<<< HEAD
               label="Email Address or Phone Number"
               type="text"
               value={identifier}
@@ -169,15 +137,6 @@ export const LoginPage: React.FC = () => {
               placeholder="e.g. doctor@hospital.com or +1 234 567 8900"
               required
               leftIcon={isPhoneIdentifier ? <Phone className="w-4 h-4 text-teal-600" /> : <Mail className="w-4 h-4" />}
-=======
-              label="Hospital Staff / Patient Email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="e.g. doctor@hospital.org"
-              required
-              leftIcon={<Mail className="w-4 h-4" />}
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
             />
 
             <Input
@@ -213,7 +172,6 @@ export const LoginPage: React.FC = () => {
             <Button type="submit" variant="primary" size="md" className="w-full mt-2" isLoading={isLoading}>
               Secure Portal Sign In
             </Button>
-<<<<<<< HEAD
 
             <div className="pt-2 text-center">
               <span className="text-xs text-slate-500">New inpatient arriving at the hospital? </span>
@@ -221,8 +179,6 @@ export const LoginPage: React.FC = () => {
                 Register as Patient
               </Link>
             </div>
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
           </form>
 
           {/* Secure Messaging Banner */}
@@ -239,11 +195,7 @@ export const LoginPage: React.FC = () => {
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
-<<<<<<< HEAD
                 onClick={() => handleQuickLogin('admin', 'admin@hospital.com')}
-=======
-                onClick={() => handleQuickLogin('admin', 'admin@hospital.org')}
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                 className="p-2.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-teal-50 hover:border-teal-300 text-left transition-colors flex items-center gap-2"
               >
                 <Users className="w-4 h-4 text-teal-700 shrink-0" />
@@ -255,11 +207,7 @@ export const LoginPage: React.FC = () => {
 
               <button
                 type="button"
-<<<<<<< HEAD
                 onClick={() => handleQuickLogin('doctor', 'doctor@hospital.com')}
-=======
-                onClick={() => handleQuickLogin('doctor', 'doctor@hospital.org')}
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                 className="p-2.5 rounded-lg border border-teal-200 bg-teal-50 hover:bg-teal-100 text-left transition-colors flex items-center gap-2"
               >
                 <Stethoscope className="w-4 h-4 text-teal-800 shrink-0" />
@@ -271,11 +219,7 @@ export const LoginPage: React.FC = () => {
 
               <button
                 type="button"
-<<<<<<< HEAD
                 onClick={() => handleQuickLogin('kitchen', 'kitchen@hospital.com')}
-=======
-                onClick={() => handleQuickLogin('kitchen', 'kitchen@hospital.org')}
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                 className="p-2.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-amber-50 hover:border-amber-300 text-left transition-colors flex items-center gap-2"
               >
                 <ChefHat className="w-4 h-4 text-amber-600 shrink-0" />
@@ -287,20 +231,12 @@ export const LoginPage: React.FC = () => {
 
               <button
                 type="button"
-<<<<<<< HEAD
                 onClick={() => handleQuickLogin('patient', 'patient@hospital.com')}
-=======
-                onClick={() => handleQuickLogin('patient', 'patient@hospital.org')}
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                 className="p-2.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-emerald-50 hover:border-emerald-300 text-left transition-colors flex items-center gap-2"
               >
                 <HeartPulse className="w-4 h-4 text-emerald-600 shrink-0" />
                 <div className="text-xs">
-<<<<<<< HEAD
                   <strong className="block text-slate-800 font-semibold leading-tight">Patient</strong>
-=======
-                  <strong className="block text-slate-800 font-semibold leading-tight">Patient Arun</strong>
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                   <span className="text-[10px] text-slate-400">Room 304-B</span>
                 </div>
               </button>

@@ -11,11 +11,7 @@ export interface DoctorApprovalModalProps {
   recommendation: FoodRecommendation | null;
   patient: Patient | null;
   mode: 'approve' | 'reject';
-<<<<<<< HEAD
   onConfirm: (rec: FoodRecommendation, remarks: string) => Promise<void>;
-=======
-  onConfirm: (recId: string, remarks: string) => Promise<void>;
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 }
 
 export const DoctorApprovalModal: React.FC<DoctorApprovalModalProps> = ({
@@ -29,7 +25,6 @@ export const DoctorApprovalModal: React.FC<DoctorApprovalModalProps> = ({
   const [remarks, setRemarks] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-<<<<<<< HEAD
   React.useEffect(() => {
     if (isOpen && recommendation) {
       setRemarks(recommendation.doctorApproval?.doctorRemarks || '');
@@ -38,8 +33,6 @@ export const DoctorApprovalModal: React.FC<DoctorApprovalModalProps> = ({
     }
   }, [isOpen, recommendation]);
 
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   if (!recommendation) return null;
 
   const { food, diseaseCompatibility, allergyCheck, safetyStatus } = recommendation;
@@ -49,11 +42,7 @@ export const DoctorApprovalModal: React.FC<DoctorApprovalModalProps> = ({
     e.preventDefault();
     setIsSubmitting(true);
     try {
-<<<<<<< HEAD
       await onConfirm(recommendation, remarks);
-=======
-      await onConfirm(recommendation.id, remarks);
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
       setRemarks('');
       onClose();
     } finally {

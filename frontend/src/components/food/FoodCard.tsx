@@ -14,11 +14,8 @@ import { FoodRecommendation, Patient } from '../../types';
 import { Button } from '../common/Button';
 import { StatusBadge } from '../common/StatusBadge';
 
-<<<<<<< HEAD
 const DEFAULT_FOOD_IMAGE = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80';
 
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 export interface FoodCardProps {
   recommendation: FoodRecommendation;
   patient?: Patient;
@@ -39,11 +36,8 @@ export const FoodCard: React.FC<FoodCardProps> = ({
   const { food, diseaseCompatibility, allergyCheck, safetyStatus, doctorApproval } = recommendation;
   const isConflict = allergyCheck.hasConflict;
 
-<<<<<<< HEAD
   const imageSrc = food?.image && food.image.trim() !== '' ? food.image : DEFAULT_FOOD_IMAGE;
 
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   return (
     <div
       className={`bg-white rounded-xl border transition-all hover:shadow-md flex flex-col justify-between overflow-hidden ${
@@ -54,7 +48,6 @@ export const FoodCard: React.FC<FoodCardProps> = ({
       <div>
         <div className="relative h-44 bg-slate-100 overflow-hidden">
           <img
-<<<<<<< HEAD
             src={imageSrc}
             alt={food?.name || 'Food item'}
             referrerPolicy="no-referrer"
@@ -64,15 +57,6 @@ export const FoodCard: React.FC<FoodCardProps> = ({
               if (target.src !== DEFAULT_FOOD_IMAGE) {
                 target.src = DEFAULT_FOOD_IMAGE;
               }
-=======
-            src={food.image}
-            alt={food.name}
-            referrerPolicy="no-referrer"
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              // Fallback placeholder image
-              (e.target as HTMLElement).style.display = 'none';
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-black/10" />
@@ -200,7 +184,6 @@ export const FoodCard: React.FC<FoodCardProps> = ({
 
         {onReject && (
           <Button
-<<<<<<< HEAD
             variant={doctorApproval.status === 'rejected' ? 'secondary' : 'outline'}
             size="sm"
             onClick={() => onReject(recommendation)}
@@ -248,27 +231,6 @@ export const FoodCard: React.FC<FoodCardProps> = ({
             ) : (
               'Approve'
             )}
-=======
-            variant="outline"
-            size="sm"
-            onClick={() => onReject(recommendation)}
-            disabled={doctorApproval.status === 'rejected'}
-            className="flex-1 text-red-600 border-red-200 hover:bg-red-50 hover:border-red-300"
-          >
-            Reject
-          </Button>
-        )}
-
-        {onApprove && !isConflict && (
-          <Button
-            variant="primary"
-            size="sm"
-            onClick={() => onApprove(recommendation)}
-            disabled={doctorApproval.status === 'approved'}
-            className="flex-1"
-          >
-            Approve
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
           </Button>
         )}
       </div>

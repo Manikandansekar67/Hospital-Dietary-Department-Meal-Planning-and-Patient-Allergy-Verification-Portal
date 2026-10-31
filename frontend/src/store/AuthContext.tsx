@@ -6,12 +6,8 @@ interface AuthContextType {
   user: User | null;
   role: Role | null;
   isLoading: boolean;
-<<<<<<< HEAD
   login: (identifier: string, role?: Role, password?: string) => Promise<User>;
   registerPatient: (data: any) => Promise<User>;
-=======
-  login: (email: string, role?: Role) => Promise<User>;
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   logout: () => Promise<void>;
   switchRole: (role: Role) => Promise<User>;
   availableUsers: User[];
@@ -31,17 +27,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(false);
   }, []);
 
-<<<<<<< HEAD
   const login = async (identifier: string, role?: Role, password?: string) => {
     setIsLoading(true);
     try {
       const loggedUser = await authService.login(identifier, role, password);
-=======
-  const login = async (email: string, role?: Role) => {
-    setIsLoading(true);
-    try {
-      const loggedUser = await authService.login(email, role);
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
       setUser(loggedUser);
       return loggedUser;
     } finally {
@@ -49,7 +38,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-<<<<<<< HEAD
   const registerPatient = async (data: any) => {
     setIsLoading(true);
     try {
@@ -61,8 +49,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   const logout = async () => {
     setIsLoading(true);
     try {
@@ -91,10 +77,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         role: user?.role || null,
         isLoading,
         login,
-<<<<<<< HEAD
         registerPatient,
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
         logout,
         switchRole,
         availableUsers,

@@ -30,17 +30,11 @@ import { orderService } from '../../services/orderService';
 import { patientService } from '../../services/patientService';
 import { Food, MealSession, Patient } from '../../types';
 
-<<<<<<< HEAD
 const DEFAULT_FOOD_IMAGE = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80';
 
 export const PatientFoodMenuPage: React.FC = () => {
   const { user } = useAuth();
   const { kitchenStatus, currentSession, toggleKitchenStatus } = useKitchen();
-=======
-export const PatientFoodMenuPage: React.FC = () => {
-  const { user } = useAuth();
-  const { kitchenStatus, currentSession } = useKitchen();
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   const { addToast } = useNotifications();
   const navigate = useNavigate();
 
@@ -157,7 +151,6 @@ export const PatientFoodMenuPage: React.FC = () => {
 
       {/* Kitchen Inactive Notice (Section 22 requirement) */}
       {!kitchenStatus.isActive && (
-<<<<<<< HEAD
         <div className="p-5 rounded-2xl bg-amber-50 border-2 border-amber-400 text-amber-950 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs">
           <div className="flex items-start gap-3">
             <Clock className="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
@@ -179,20 +172,6 @@ export const PatientFoodMenuPage: React.FC = () => {
           >
             Open Kitchen (Demo Toggle)
           </button>
-=======
-        <div className="p-5 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 flex items-start gap-3">
-          <Clock className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-          <div>
-            <h4 className="text-sm font-bold text-amber-900">
-              Hospital Kitchen is Currently Closed
-            </h4>
-            <p className="text-xs text-amber-800 mt-0.5 leading-relaxed">
-              The central dietary kitchen is between preparation sessions. You may browse your approved
-              meal list below, but ordering is temporarily disabled until the kitchen reopens.
-              Please check with your nurse for next service time.
-            </p>
-          </div>
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
         </div>
       )}
 
@@ -228,7 +207,6 @@ export const PatientFoodMenuPage: React.FC = () => {
                 {/* Food Image */}
                 <div className="relative h-44 bg-slate-100 overflow-hidden">
                   <img
-<<<<<<< HEAD
                     src={food.image && food.image.trim() !== '' ? food.image : DEFAULT_FOOD_IMAGE}
                     alt={food.name}
                     referrerPolicy="no-referrer"
@@ -239,12 +217,6 @@ export const PatientFoodMenuPage: React.FC = () => {
                         target.src = DEFAULT_FOOD_IMAGE;
                       }
                     }}
-=======
-                    src={food.image}
-                    alt={food.name}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover"
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                   />
                   <div className="absolute top-3 left-3 bg-white/95 text-teal-800 text-[10px] font-bold px-2.5 py-1 rounded-md shadow-xs">
                     {food.category}
@@ -350,11 +322,7 @@ export const PatientFoodMenuPage: React.FC = () => {
                 <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                   <span className="font-semibold text-emerald-950 text-xs">
-<<<<<<< HEAD
                     Available Today for {currentSession} Session
-=======
-                    Available Today for {currentSession} Service
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                   </span>
                 </div>
 

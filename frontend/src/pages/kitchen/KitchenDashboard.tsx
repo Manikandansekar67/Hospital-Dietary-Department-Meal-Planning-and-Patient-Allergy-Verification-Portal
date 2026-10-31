@@ -6,11 +6,8 @@ import {
   CalendarCheck,
   CheckCircle2,
   ChefHat,
-<<<<<<< HEAD
   CircleAlert,
   CircleCheck,
-=======
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   Clock,
   Power,
   ShieldCheck,
@@ -87,7 +84,6 @@ export const KitchenDashboard: React.FC = () => {
           </div>
 
           <h2 className="text-2xl sm:text-3xl font-black tracking-tight flex items-center gap-2">
-<<<<<<< HEAD
             {kitchenStatus.isActive ? (
               <>
                 <CircleCheck className="w-7 h-7 text-emerald-400 shrink-0" />
@@ -99,10 +95,6 @@ export const KitchenDashboard: React.FC = () => {
                 <span>Kitchen Intake Currently Inactive</span>
               </>
             )}
-=======
-            <Power className={`w-6 h-6 ${kitchenStatus.isActive ? 'text-emerald-300' : 'text-red-400'}`} />
-            {kitchenStatus.isActive ? 'Kitchen Operational — Intake Active' : 'Kitchen Intake Currently Inactive'}
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
           </h2>
 
           <p className="text-xs sm:text-sm text-slate-200 max-w-xl leading-relaxed">
@@ -138,13 +130,8 @@ export const KitchenDashboard: React.FC = () => {
             {kitchenStatus.isActive ? 'Deactivate Kitchen' : 'Activate Kitchen Now'}
           </button>
           <span className="text-[10px] text-slate-300">
-<<<<<<< HEAD
             Last toggled: {new Date(kitchenStatus.lastToggledAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} by{' '}
             {kitchenStatus.toggledBy}
-=======
-            Last toggled: {kitchenStatus.lastToggledAt ? new Date(kitchenStatus.lastToggledAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--'} by{' '}
-            {kitchenStatus.lastToggledBy || kitchenStatus.toggledBy || 'Staff'}
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
           </span>
         </div>
       </div>
@@ -199,7 +186,6 @@ export const KitchenDashboard: React.FC = () => {
 
       {/* Allergy Isolation & Production Station Quick Alert */}
       {activeAllergyOrders.length > 0 && (
-<<<<<<< HEAD
         <div className="p-4 bg-red-50 border-2 border-red-500 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center shrink-0 animate-pulse">
@@ -209,17 +195,6 @@ export const KitchenDashboard: React.FC = () => {
               <h4 className="text-sm font-extrabold text-red-950 flex items-center gap-1.5">
                 <AlertOctagon className="w-4 h-4 text-red-600 inline shrink-0" />
                 <span>{activeAllergyOrders.length} Active Kitchen Order(s) with Patient Food Allergies!</span>
-=======
-        <div className="p-4 bg-red-50 border border-red-200 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0">
-              <AlertOctagon className="w-6 h-6" />
-            </div>
-            <div>
-              <h4 className="text-sm font-extrabold text-red-950 flex items-center gap-2">
-                <AlertOctagon className="w-4 h-4 text-red-600" />
-                {activeAllergyOrders.length} Active Kitchen Order(s) with Patient Food Allergies
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
               </h4>
               <p className="text-xs text-red-800 mt-0.5">
                 Ensure strict protocol: separate cookware, isolated sanitization, and allergen avoidance instructions.
@@ -277,11 +252,7 @@ export const KitchenDashboard: React.FC = () => {
             </div>
             <h4 className="text-sm font-bold text-slate-900">Allergen Isolation Station</h4>
             <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-<<<<<<< HEAD
               Dedicated high-visibility station showing exact avoided ingredients with clinical cross-contact precautions.
-=======
-              Dedicated high-visibility station showing exact avoided ingredients for each patient.
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
             </p>
           </div>
           <Link to="/kitchen/allergy-prep" className="mt-4">

@@ -13,7 +13,6 @@ export const apiClient = axios.create({
 // Request interceptor for auth headers
 apiClient.interceptors.request.use(
   (config) => {
-<<<<<<< HEAD
     const token = localStorage.getItem('hdmp_token');
     const userStr = localStorage.getItem('hdmp_current_user');
 
@@ -28,15 +27,6 @@ apiClient.interceptors.request.use(
           config.headers['X-User-Role'] = String(user.role).toUpperCase();
         }
       } catch {
-=======
-    const userStr = localStorage.getItem('hdmp_current_user');
-    if (userStr) {
-      try {
-        const user = JSON.parse(userStr);
-        config.headers.Authorization = `Bearer mock-jwt-token-for-${user.id}`;
-        config.headers['X-User-Role'] = user.role;
-      } catch (e) {
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
         // ignore
       }
     }
@@ -45,7 +35,6 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-<<<<<<< HEAD
 // Response interceptor to handle 401 Unauthorized
 apiClient.interceptors.response.use(
   (response) => response,
@@ -63,7 +52,3 @@ apiClient.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-=======
-// Helper for simulated network latency
-export const delay = (ms = 300) => new Promise((resolve) => setTimeout(resolve, ms));
->>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
