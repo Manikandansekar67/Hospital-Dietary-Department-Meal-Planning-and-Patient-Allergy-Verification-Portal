@@ -71,11 +71,12 @@ export const createApp = (): Express => {
   // 4. Rate Limiting
   app.use('/api', apiRateLimiter);
 
-  // 5. System Health Check (supports both /api/health and /health)
-  app.get(['/api/health', '/health'], (_req: Request, res: Response) => {
+  // 5. System Health Check & Root Endpoint (supports /, /api, /api/health, and /health)
+  app.get(['/', '/api', '/api/health', '/health'], (_req: Request, res: Response) => {
     res.json({
       status: 'UP',
       service: 'hospital-dietary-api',
+      message: 'Hospital Dietary Department Meal Planning and Patient Allergy Verification API is active',
       database: isDatabaseConnected() ? 'connected' : 'in-memory-fallback',
       odm: 'mongoose',
       timestamp: new Date().toISOString(),
