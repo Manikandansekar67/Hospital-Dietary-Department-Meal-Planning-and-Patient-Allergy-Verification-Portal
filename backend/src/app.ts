@@ -26,7 +26,13 @@ export const createApp = (): Express => {
 
   // Dynamic CORS configuration supporting local dev, Vercel deployments (*.vercel.app), and custom origins
   const configuredOrigin = env.CORS_ORIGIN;
-  const allowedList = configuredOrigin && configuredOrigin !== '*' ? configuredOrigin.split(',').map((o) => o.trim()) : [];
+  const allowedList = configuredOrigin && configuredOrigin !== '*' ? configuredOrigin.split(',').map((o) => o.trim().replace(/\/+$/, '')) : [];
+  if (env.FRONTEND_URL) {
+    const cleanFrontendUrl = env.FRONTEND_URL.trim().replace(/\/+$/, '');
+    if (cleanFrontendUrl && !allowedList.includes(cleanFrontendUrl)) {
+      allowedList.push(cleanFrontendUrl);
+    }
+  }
 
   app.use(
     cors({
