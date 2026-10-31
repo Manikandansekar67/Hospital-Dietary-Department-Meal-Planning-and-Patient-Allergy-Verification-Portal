@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+<<<<<<< HEAD
 import {
   AlertCircle,
   Calendar,
@@ -13,6 +14,9 @@ import {
   UserCheck,
   UserX,
 } from 'lucide-react';
+=======
+import { CheckCircle2, Edit2, Plus, Search, Shield, UserCheck, UserX } from 'lucide-react';
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 import { Badge } from '../../components/common/Badge';
 import { Button } from '../../components/common/Button';
 import { Card } from '../../components/common/Card';
@@ -24,6 +28,7 @@ import { EmptyState, LoadingState } from '../../components/common/StateFeedback'
 import { adminService } from '../../services/adminService';
 import { Role, User } from '../../types';
 
+<<<<<<< HEAD
 export const computeDobPassword = (dobStr: string): string => {
   if (!dobStr) return '';
   const ymd = dobStr.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})$/);
@@ -40,6 +45,11 @@ export const UserManagement: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+=======
+export const UserManagement: React.FC = () => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState<string>('all');
 
@@ -48,6 +58,7 @@ export const UserManagement: React.FC = () => {
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+<<<<<<< HEAD
   const [phone, setPhone] = useState('');
   const [age, setAge] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
@@ -59,6 +70,11 @@ export const UserManagement: React.FC = () => {
   const [formError, setFormError] = useState<string | null>(null);
   const [formFieldErrors, setFormFieldErrors] = useState<Record<string, string>>({});
 
+=======
+  const [userRole, setUserRole] = useState<Role>('doctor');
+  const [department, setDepartment] = useState('');
+
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   useEffect(() => {
     loadUsers();
   }, []);
@@ -77,6 +93,7 @@ export const UserManagement: React.FC = () => {
     setEditingUser(null);
     setName('');
     setEmail('');
+<<<<<<< HEAD
     setPhone('');
     setAge('');
     setDateOfBirth('');
@@ -85,6 +102,10 @@ export const UserManagement: React.FC = () => {
     setDepartment('');
     setFormError(null);
     setFormFieldErrors({});
+=======
+    setUserRole('doctor');
+    setDepartment('');
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     setIsModalOpen(true);
   };
 
@@ -92,6 +113,7 @@ export const UserManagement: React.FC = () => {
     setEditingUser(u);
     setName(u.name);
     setEmail(u.email);
+<<<<<<< HEAD
     setPhone(u.phone || '');
     setAge(u.age !== undefined && u.age !== null ? String(u.age) : '');
     setDateOfBirth(u.dateOfBirth || '');
@@ -181,10 +203,21 @@ export const UserManagement: React.FC = () => {
 
     setFormFieldErrors(errors);
     return Object.keys(errors).length === 0;
+=======
+    setUserRole(u.role);
+    setDepartment(u.department || '');
+    setIsModalOpen(true);
+  };
+
+  const handleToggleActive = async (id: string) => {
+    const updated = await adminService.toggleUserStatus(id);
+    setUsers((prev) => prev.map((u) => (u.id === id ? updated : u)));
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+<<<<<<< HEAD
     setFormError(null);
 
     if (!validateForm()) {
@@ -233,13 +266,37 @@ export const UserManagement: React.FC = () => {
     } finally {
       setIsSubmitting(false);
     }
+=======
+    if (editingUser) {
+      const updated = await adminService.updateUser(editingUser.id, {
+        name,
+        email,
+        role: userRole,
+        department,
+      });
+      setUsers((prev) => prev.map((u) => (u.id === editingUser.id ? updated : u)));
+    } else {
+      const created = await adminService.addUser({
+        name,
+        email,
+        role: userRole,
+        department,
+        active: true,
+      });
+      setUsers((prev) => [created, ...prev]);
+    }
+    setIsModalOpen(false);
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   };
 
   const filteredUsers = users.filter((u) => {
     const matchesSearch =
       u.name.toLowerCase().includes(search.toLowerCase()) ||
       u.email.toLowerCase().includes(search.toLowerCase()) ||
+<<<<<<< HEAD
       (u.phone && u.phone.includes(search)) ||
+=======
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
       (u.department && u.department.toLowerCase().includes(search.toLowerCase()));
     const matchesRole = roleFilter === 'all' || u.role === roleFilter;
     return matchesSearch && matchesRole;
@@ -265,8 +322,13 @@ export const UserManagement: React.FC = () => {
         <SearchBar
           value={search}
           onChange={setSearch}
+<<<<<<< HEAD
           placeholder="Search by name, email, phone, or department..."
           className="w-full sm:w-80"
+=======
+          placeholder="Search by name, email, or department..."
+          className="w-full sm:w-72"
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
         />
         <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto">
           {['all', 'admin', 'doctor', 'kitchen', 'patient'].map((r) => (
@@ -303,7 +365,10 @@ export const UserManagement: React.FC = () => {
                 <tr>
                   <th className="py-3 px-4 font-bold">User Name &amp; Email</th>
                   <th className="py-3 px-4 font-bold">Role</th>
+<<<<<<< HEAD
                   <th className="py-3 px-4 font-bold">Contact &amp; DOB</th>
+=======
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                   <th className="py-3 px-4 font-bold">Department / Ward</th>
                   <th className="py-3 px-4 font-bold">Status</th>
                   <th className="py-3 px-4 font-bold text-right">Actions</th>
@@ -338,6 +403,7 @@ export const UserManagement: React.FC = () => {
                         {u.role.toUpperCase()}
                       </Badge>
                     </td>
+<<<<<<< HEAD
                     <td className="py-3 px-4">
                       <div className="space-y-0.5">
                         <div className="flex items-center gap-1.5 text-slate-700 font-medium">
@@ -353,6 +419,8 @@ export const UserManagement: React.FC = () => {
                         </div>
                       </div>
                     </td>
+=======
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                     <td className="py-3 px-4 text-slate-600 font-medium">{u.department || 'General Dietary'}</td>
                     <td className="py-3 px-4">
                       <span
@@ -376,16 +444,24 @@ export const UserManagement: React.FC = () => {
                         </button>
                         <button
                           type="button"
+<<<<<<< HEAD
                           onClick={() => handleToggleActive(u.id, u.active)}
                           className={`p-1.5 rounded ${
                             u.active
                               ? 'text-slate-400 hover:text-amber-600 hover:bg-amber-50'
+=======
+                          onClick={() => handleToggleActive(u.id)}
+                          className={`p-1.5 rounded ${
+                            u.active
+                              ? 'text-slate-400 hover:text-red-600 hover:bg-red-50'
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                               : 'text-emerald-600 hover:bg-emerald-50'
                           }`}
                           title={u.active ? 'Disable user access' : 'Enable user access'}
                         >
                           {u.active ? <UserX className="w-4 h-4" /> : <UserCheck className="w-4 h-4" />}
                         </button>
+<<<<<<< HEAD
                         <button
                           type="button"
                           onClick={() => handleDeleteUser(u)}
@@ -394,6 +470,8 @@ export const UserManagement: React.FC = () => {
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
+=======
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                       </div>
                     </td>
                   </tr>
@@ -409,6 +487,7 @@ export const UserManagement: React.FC = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         title={editingUser ? 'Edit User Credentials' : 'Add New Hospital User'}
+<<<<<<< HEAD
         subtitle="Manage access roles, credentials, and departmental assignment"
         maxWidth="md"
       >
@@ -489,6 +568,27 @@ export const UserManagement: React.FC = () => {
             />
           </div>
 
+=======
+        subtitle="Manage access roles and departmental assignment"
+        maxWidth="md"
+      >
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <Input
+            label="Full Name & Clinical Credentials"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="e.g. Dr. Sarah Jenkins, MD"
+            required
+          />
+          <Input
+            label="Email Address"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="e.g. sjenkins@hospital.org"
+            required
+          />
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
           <Select
             label="System Role"
             value={userRole}
@@ -500,7 +600,10 @@ export const UserManagement: React.FC = () => {
               { value: 'patient', label: 'Patient (Inpatient Bedside)' },
             ]}
           />
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
           <Input
             label="Hospital Department / Ward"
             value={department}
@@ -508,6 +611,7 @@ export const UserManagement: React.FC = () => {
             placeholder="e.g. Endocrinology & Nutrition / Ward 3"
           />
 
+<<<<<<< HEAD
           {!editingUser && (
             <div className="p-3.5 bg-teal-50/80 border border-teal-200 rounded-xl space-y-2">
               <div className="flex items-center gap-1.5 font-bold text-xs text-teal-900">
@@ -541,6 +645,13 @@ export const UserManagement: React.FC = () => {
               Cancel
             </Button>
             <Button type="submit" size="sm" isLoading={isSubmitting}>
+=======
+          <div className="flex items-center justify-end gap-2 pt-3">
+            <Button type="button" variant="outline" size="sm" onClick={() => setIsModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button type="submit" size="sm">
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
               {editingUser ? 'Save Updates' : 'Create User'}
             </Button>
           </div>

@@ -125,11 +125,15 @@ export const DoctorAddFoodPage: React.FC = () => {
 
   const handleApproveEvaluatedFood = async () => {
     if (!evaluationResult) return;
+<<<<<<< HEAD
     await doctorService.approveFood({
       foodId: evaluationResult.foodId || evaluationResult.food.id,
       patientId: evaluationResult.patientId || targetPatientId,
       remarks: doctorRemarks || 'Approved by examining physician.',
     });
+=======
+    await doctorService.approveFood(evaluationResult.id, doctorRemarks || 'Approved by examining physician.');
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     addToast({
       title: 'Food Clinically Approved',
       message: `${evaluationResult.food.name} is now approved and will become available when kitchen is active.`,

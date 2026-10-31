@@ -118,12 +118,21 @@ export const KitchenOrdersPage: React.FC = () => {
         />
       ) : (
         <div className="space-y-4">
+<<<<<<< HEAD
           {filtered.map((order, orderIdx) => {
             const hasAllergy = (order.patientAllergies || []).length > 0;
 
             return (
               <div
                 key={order.id || `order-${orderIdx}`}
+=======
+          {filtered.map((order) => {
+            const hasAllergy = order.patientAllergies.length > 0;
+
+            return (
+              <div
+                key={order.id}
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                 className={`bg-white rounded-2xl border p-5 transition-all shadow-2xs ${
                   hasAllergy ? 'border-amber-300 ring-1 ring-amber-100' : 'border-slate-200'
                 }`}

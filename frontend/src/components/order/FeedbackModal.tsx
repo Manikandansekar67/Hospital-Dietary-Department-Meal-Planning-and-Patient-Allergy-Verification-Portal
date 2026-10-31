@@ -9,8 +9,12 @@ export interface FeedbackModalProps {
   isOpen: boolean;
   onClose: () => void;
   order: Order | null;
+<<<<<<< HEAD
   onFeedbackSubmitted?: (updatedOrder: Order) => void;
   onSubmit?: (orderId: string, rating: number, comment: string) => Promise<void> | void;
+=======
+  onFeedbackSubmitted: (updatedOrder: Order) => void;
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 }
 
 export const FeedbackModal: React.FC<FeedbackModalProps> = ({
@@ -18,7 +22,10 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({
   onClose,
   order,
   onFeedbackSubmitted,
+<<<<<<< HEAD
   onSubmit,
+=======
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 }) => {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState('');
@@ -30,6 +37,7 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({
     e.preventDefault();
     setIsSubmitting(true);
     try {
+<<<<<<< HEAD
       if (onSubmit) {
         await onSubmit(order.id, rating, comment);
       } else {
@@ -38,6 +46,10 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({
           onFeedbackSubmitted(updated);
         }
       }
+=======
+      const updated = await feedbackService.submitFeedback(order.id, rating, comment);
+      onFeedbackSubmitted(updated);
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
       onClose();
     } finally {
       setIsSubmitting(false);

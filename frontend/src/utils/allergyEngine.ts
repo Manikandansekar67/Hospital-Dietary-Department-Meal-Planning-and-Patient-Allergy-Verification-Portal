@@ -147,7 +147,11 @@ export function evaluateFoodForPatient(
 
   const allergyDetails = hasAllergyConflict
     ? `DETECTED ALLERGY CONFLICT: Patient has ${worstSeverity?.toUpperCase()} ${conflictingAllergenName} allergy. Conflicting ingredients found: ${conflictingIngredients.join(', ')}.`
+<<<<<<< HEAD
     : 'No detected allergen conflicts. Verified against patient profile.';
+=======
+    : 'No severe allergy conflict detected based on patient records.';
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 
   return {
     foodId: food.id,

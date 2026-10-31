@@ -104,6 +104,7 @@ export const DiseaseManagement: React.FC = () => {
 
               <div className="space-y-2 pt-2 border-t border-slate-100 text-xs">
                 <div>
+<<<<<<< HEAD
                   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-1 mb-1">
                     <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
                     Recommended Diet Focus:
@@ -121,10 +122,25 @@ export const DiseaseManagement: React.FC = () => {
                         </span>
                       ))
                     )}
+=======
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 block mb-1">
+                    ✓ Recommended Diet Focus:
+                  </span>
+                  <div className="flex flex-wrap gap-1">
+                    {(d.recommendedFoodItems ?? d.compatibleCategories ?? []).map((item, i) => (
+                      <span
+                        key={i}
+                        className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-medium"
+                      >
+                        {item}
+                      </span>
+                    ))}
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                   </div>
                 </div>
 
                 <div>
+<<<<<<< HEAD
                   <span className="text-[10px] font-bold uppercase tracking-wider text-red-800 flex items-center gap-1 mb-1">
                     <XCircle className="w-3 h-3 text-red-600 shrink-0" />
                     Contraindicated / Strictly Avoid:
@@ -142,6 +158,20 @@ export const DiseaseManagement: React.FC = () => {
                         </span>
                       ))
                     )}
+=======
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-red-800 block mb-1">
+                    ✗ Contraindicated / Strictly Avoid:
+                  </span>
+                  <div className="flex flex-wrap gap-1">
+                    {(d.avoidFoodItems ?? d.contraindications ?? []).map((item, i) => (
+                      <span
+                        key={i}
+                        className="px-1.5 py-0.5 rounded bg-red-50 text-red-800 border border-red-200 text-[10px] font-medium"
+                      >
+                        {item}
+                      </span>
+                    ))}
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
                   </div>
                 </div>
               </div>

@@ -12,7 +12,10 @@ import { ProtectedRoute } from './components/layout/ProtectedRoute';
 
 // Pages
 import { LoginPage } from './pages/auth/LoginPage';
+<<<<<<< HEAD
 import { RegisterPage } from './pages/auth/RegisterPage';
+=======
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 
 // Admin Pages
 import { AdminDashboard } from './pages/admin/AdminDashboard';
@@ -75,9 +78,14 @@ export default function App() {
         <NotificationProvider>
           <KitchenProvider>
             <Routes>
+<<<<<<< HEAD
               {/* Public Authentication Routes */}
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+=======
+              {/* Public Authentication Route */}
+              <Route path="/login" element={<LoginPage />} />
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 
               {/* Protected App Layout */}
               <Route

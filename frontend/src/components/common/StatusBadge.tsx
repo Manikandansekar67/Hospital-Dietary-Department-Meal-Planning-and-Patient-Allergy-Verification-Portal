@@ -14,13 +14,19 @@ import { AllergySeverity, OrderStatus, SafetyStatus } from '../../types';
 import { Badge } from './Badge';
 
 interface StatusBadgeProps {
+<<<<<<< HEAD
   type: 'safety' | 'order' | 'approval' | 'severity' | 'status';
   value: SafetyStatus | OrderStatus | 'approved' | 'rejected' | 'pending' | AllergySeverity | 'admitted' | 'discharged' | string;
+=======
+  type: 'safety' | 'order' | 'approval' | 'severity';
+  value: SafetyStatus | OrderStatus | 'approved' | 'rejected' | 'pending' | AllergySeverity;
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   size?: 'sm' | 'md';
   className?: string;
 }
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({ type, value, size = 'md', className = '' }) => {
+<<<<<<< HEAD
   if (type === 'status') {
     if (value === 'admitted') {
       return (
@@ -38,6 +44,8 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ type, value, size = 'm
     }
     // If it's an order or other status passed as 'status'
   }
+=======
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   if (type === 'safety') {
     const safety = value as SafetyStatus;
     switch (safety) {

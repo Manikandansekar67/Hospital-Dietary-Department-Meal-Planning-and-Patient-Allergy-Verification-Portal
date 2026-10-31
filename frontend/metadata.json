@@ -1,0 +1,6 @@
+{
+  "name": "Hospital Dietary & Allergy Verification Portal",
+  "description": "Hospital dietary management portal for patient allergy verification, doctor food approvals, kitchen meal prep, and patient ordering.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,7 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { kitchenService } from '../services/kitchenService';
 import { KitchenStatus } from '../types';
+<<<<<<< HEAD
 import { useAuth } from './AuthContext';
+=======
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 
 interface KitchenContextType {
   kitchenStatus: KitchenStatus;
@@ -35,13 +38,17 @@ export const KitchenProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [kitchenStatus, setKitchenStatus] = useState<KitchenStatus>(defaultStatus);
   const [isLoading, setIsLoading] = useState(true);
   const [availableTodayCount, setAvailableTodayCount] = useState(0);
+<<<<<<< HEAD
   const { user } = useAuth();
+=======
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 
   const currentSession = kitchenStatus.activeSession ?? deriveCurrentSession();
 
   const refreshStatus = async () => {
     try {
       const status = await kitchenService.getKitchenStatus();
+<<<<<<< HEAD
       if (status) {
         setKitchenStatus(status);
       }
@@ -62,6 +69,19 @@ export const KitchenProvider: React.FC<{ children: React.ReactNode }> = ({ child
       if (err?.response?.status !== 401) {
         console.warn('Kitchen status unavailable:', err?.message || err);
       }
+=======
+      setKitchenStatus(status);
+
+      // Also fetch available foods count
+      try {
+        const available = await kitchenService.getDailyAvailability();
+        setAvailableTodayCount(available.filter((a: any) => a.isAvailable).length);
+      } catch {
+        // non-critical
+      }
+    } catch (err) {
+      console.error('Failed to load kitchen status:', err);
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +89,11 @@ export const KitchenProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   useEffect(() => {
     refreshStatus();
+<<<<<<< HEAD
   }, [user?.id]);
+=======
+  }, []);
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
 
   const toggleKitchenStatus = async (isActive: boolean, staffName: string) => {
     const updated = await kitchenService.toggleKitchenStatus(isActive, staffName);

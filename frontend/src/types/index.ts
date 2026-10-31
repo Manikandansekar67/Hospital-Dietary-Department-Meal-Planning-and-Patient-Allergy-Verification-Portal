@@ -24,8 +24,11 @@ export interface User {
   role: Role;
   avatar?: string;
   phone?: string;
+<<<<<<< HEAD
   age?: number;
   dateOfBirth?: string;
+=======
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   department?: string;
   active: boolean;
   patientId?: string; // If role is patient
@@ -91,7 +94,11 @@ export interface FoodNutrition {
 export interface Food {
   id: string;
   name: string;
+<<<<<<< HEAD
   category: MealCategory;
+=======
+  category: FoodCategory;
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   description: string;
   image: string;
   ingredients: string[];
@@ -164,7 +171,10 @@ export interface KitchenStatus {
   activeSession: MealType | 'closed';
   date: string;
   announcement?: string;
+<<<<<<< HEAD
   toggledBy?: string;
+=======
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   lastToggledBy?: string;
   lastToggledAt?: string;
 }
@@ -192,9 +202,14 @@ export interface Order {
   roomNumber: string;
   foodId: string;
   foodName: string;
+<<<<<<< HEAD
   foodCategory: MealCategory;
   mealType: MealType;
   mealSession?: MealSession | string;
+=======
+  foodCategory: FoodCategory;
+  mealType: MealType;
+>>>>>>> 0c7ae5e2eaa9e1ecd06819a349ca24027fce68f3
   orderDate: string; // YYYY-MM-DD
   orderTime: string; // ISO string
   status: OrderStatus;
